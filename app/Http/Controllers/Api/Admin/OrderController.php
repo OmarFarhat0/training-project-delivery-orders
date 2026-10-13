@@ -22,7 +22,9 @@ class OrderController extends Controller
             ->when($filter === 'late', fn ($query) => $query->late())
             ->with([
                 'customer:id,name',
-                'restaurant:id,name',
+                'restaurant' => fn ($query) => $query
+                    ->withoutGlobalScope('active')
+                    ->select('id', 'name'),
                 'driver:id,name',
             ])
             ->withCount('orderItems')

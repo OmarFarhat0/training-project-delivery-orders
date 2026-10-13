@@ -13,7 +13,10 @@ class RestaurantProductController extends Controller
     {
         $restaurant = $this->findRestaurant($restaurant);
 
-        $products = $restaurant->products()->latest()->get();
+        $products = $restaurant->products()
+            ->select('id', 'restaurant_id', 'name', 'price', 'is_available')
+            ->latest()
+            ->get();
 
         return $this->success($products);
     }

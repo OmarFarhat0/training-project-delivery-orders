@@ -10,7 +10,10 @@ class RestaurantController extends Controller
 {
     public function index(): JsonResponse
     {
-        $restaurants = Restaurant::query()->latest()->get();
+        $restaurants = Restaurant::query()
+            ->select('id', 'name', 'address', 'phone')
+            ->latest()
+            ->get();
 
         return $this->success($restaurants);
     }

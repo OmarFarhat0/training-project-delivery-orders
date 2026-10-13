@@ -12,6 +12,7 @@ class RestaurantProductController extends Controller
     {
         $products = $restaurant->products()
             ->available()
+            ->select('id', 'restaurant_id', 'name', 'price')
             ->latest()
             ->get();
 

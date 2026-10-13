@@ -12,6 +12,7 @@ class RestaurantController extends Controller
     public function index(): JsonResponse
     {
         $restaurants = Restaurant::withoutGlobalScope('active')
+            ->select('id', 'name', 'address', 'phone', 'is_active')
             ->latest()
             ->get();
 
